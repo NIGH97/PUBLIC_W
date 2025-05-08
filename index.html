@@ -1,0 +1,657 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+        }
+        :root{
+            font-size: 16px;
+        }
+
+        /*BASIC*/
+        .container {  
+            display: grid;
+            grid-template-columns: 1fr 2fr 2fr 1fr;
+            grid-template-rows: 4rem auto 4rem;
+            gap: 0.25em 1em;
+            grid-auto-flow: row;
+            grid-template-areas:
+            "Header Header Header Header"
+            "AD1 Content Content AD2"
+            "Footer Footer Footer Footer";
+
+            min-height: 100vh;
+        }
+
+        .Header { 
+            grid-area: Header;
+            /*background-color: #4a90e2;*/ 
+            color: black;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 1rem;
+        }
+
+        .Footer { 
+            grid-area: Footer; 
+            /*background-color: #7b8a8b;*/
+            color: black;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 1rem;
+        }
+
+        .AD1 { 
+            grid-area: AD1; 
+            /*background-color: #f39c12;*/
+            color: black;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 1rem;
+        }
+
+        .AD2 { 
+            grid-area: AD2; 
+            /*background-color: #f39c12;*/
+            color: black;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 1rem;
+        }
+
+        .Content { 
+            grid-area: Content;
+            /*background-color: #2ecc71;*/
+            display: flex;
+            flex-direction: row;
+            align-items: center; 
+            justify-content: center;
+            padding: 1rem;
+            text-align: center;
+            gap: 1rem;
+        }
+        /*KEUSMENU*/
+        .keusmenu{
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            align-items: center;
+            width: 100%;
+            height: 100%;
+        }
+
+        .keus{
+            padding: 1.25rem;
+            border: 1px solid black;
+            margin: 1.25rem;
+            border-radius: 8px;
+            overflow: hidden;
+            background-color: #fff;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .keus:hover {
+            transform: translateY(-0.625rem);
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+            cursor: pointer;
+        }
+        /*TOOLS*/
+        /*Glassamenstelling*/
+        h1{
+            font-size: 2.5rem;
+            /*margin-bottom: 0.25rem;*/
+        }
+        h2{
+            font-size: 2rem;
+            margin-bottom: 0.25rem;
+        }
+        h3{
+            font-size: 1.5rem;
+            margin-bottom: 0.25rem;
+            margin-top: 0.25rem;
+        }
+        p{
+            font-size: 1rem;
+            margin-bottom: 0.25rem;
+        }
+        button {
+            font-size: 1rem;
+            padding: 0.75rem 1.5rem;
+            border: none;
+            background-color: #007bff;
+            color: white;
+            border-radius: 0.5rem;
+            cursor: pointer;
+            margin-top: 1rem;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+        .card{
+            display: flex;
+            flex-direction: column;
+            width: 90vw;               /* responsive breedte */
+            max-width: 30rem;          /* maximale breedte */
+            background-color: #fff;
+            padding: 2rem;
+            border-radius: 1rem;
+            box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.1);
+            margin: auto 0;
+            /*overflow: auto;*/ 
+        }
+        .card h2{
+            color: black;
+            text-align: center;
+        }
+        .card label{
+            margin-top: 1rem;
+            font-weight: bold;
+            text-align: left;
+        }
+        .card input{
+            margin-top: 0.25rem;
+            font-size: 1rem; /* 16px */
+            padding: 0.625rem; /* 10px */
+            border: 0.0625rem solid #007bff; /* 1px */
+            border-radius: 0.25rem; /* 4px */
+            background-color: #ffffff;
+            color: #333;
+            transition: border 0.3s ease;
+        }
+        .card input:hover {
+            border-color: #0056b3;
+            cursor: pointer;
+        }
+        .card select{
+            margin-top: 0.25rem;
+            font-size: 1rem; /* 16px */
+            padding: 0.625rem; /* 10px */
+            border: 0.0625rem solid #007bff; /* 1px */
+            border-radius: 0.25rem; /* 4px */
+            background-color: #ffffff;
+            color: #333;
+            transition: border 0.3s ease;
+        }
+        .card select:hover {
+            border-color: #0056b3;
+            cursor: pointer;
+        }
+        .glasinfo{
+            margin-top: 0.5rem;
+        }
+        .glasinfoglassoort{
+            color: black;
+        }
+        .glasinfosamenstelling{
+            color: black;
+        }
+        .glasinfogewicht{
+            color: black;
+        }
+        .glasinfooppervlakte{
+            color: grey;
+        }
+        .glasinfoglasdikte{
+            color: grey;
+        }
+
+        .card2{
+            display: flex;
+            flex-direction: column;
+            margin-bottom: .25rem;
+        }
+        /*BELANGRIJK*/
+        .hidden{
+            display: none;
+        }
+        .column{
+            flex-direction: column;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="Header hidden">
+            
+        </div>
+
+        <div class="Content">
+
+            <!--MENU-->
+            <div class="keusmenu" id="keusmenu">
+                <div class="keus" id="glassamenstelling" onclick="keusmenu(event)">Glassamenstelling</div>
+                <div class="keus" id="glashoek" onclick="keusmenu(event)">Glashoek</div>
+            </div>
+
+            <!--GLASSAMENSTELLING-->
+            <div class="card hidden" id="RUBglassamenstelling">
+                <div class="keus" id="home" onclick="keusmenu(event)">Home</div>
+                <h2>Glas samenstelling</h2>
+        
+                <label for="keusmenu">Glas:</label>
+                <select name="keuze" id="keuzemenu">
+                    <option value="" disabled selected hidden>Maak een keuze</option>
+                    <!--DUBBEL-->
+                    <OPTGroup label="DUBBEL">
+                        <option value="g048nietgelaagd">1.0 - G048 - niet gelaagd</option>
+                        <option value="g048gelaagd">1.0 - G048 - gelaagd</option>
+                        <option value="g048dubbelgelaagd">1.0 - G048 - dubbel gelaagd</option>
+        
+                        <option value="g038nietgelaagd">1.0 - G038 - niet gelaagd</option>
+                        <option value="g038gelaagd">1.0 - G038 - gelaagd</option>
+                        <option value="g038dubbelgelaagd">1.0 - G038 - dubbel gelaagd</option>
+        
+                        <option value="g028nietgelaagd">1.0 - G028 - niet gelaagd</option>
+                        <option value="g028gelaagd">1.0 - G028 - gelaagd</option>
+                        <option value="g028dubbelgelaagd">1.0 - G028 - dubbel gelaagd</option>
+                    </OPTGroup>
+        
+                    <!--TRIPPLE-->
+                    <OPTGroup label="TRIPLE">
+        
+                        <option value="tgg048nietgelaagd">0.6 - G048 - triple niet gelaagd</option>
+                        <option value="tgg048gelaagd">0.6 - G048 - triple gelaagd</option>
+                        <option value="tgg048dubbelgelaagd">0.6 - G048 - triple dubbel gelaagd</option>
+        
+                        <option value="tgg038nietgelaagd">0.6 - G038 - triple niet gelaagd</option>
+                        <option value="tgg038gelaagd">0.6 - G038 - triple gelaagd</option>
+                        <option value="tgg038dubbelgelaagd">0.6 - G038 - triple dubbel gelaagd</option>
+                    
+                        <option value="tgg028nietgelaagd">0.6 - G028 - triple niet gelaagd</option>
+                        <option value="tgg028gelaagd">0.6 - G028 - triple gelaagd</option>
+                        <option value="tgg028dubbelgelaagd">0.6 - G028 - triple dubbel gelaagd</option>
+                    </OPTGroup>
+                    <optgroup label="Balustrade">
+                        <option value="balustrade">Balustrade</option>
+                    </optgroup>
+                </select>
+        
+                <label for="breedte">Breedte (mm):</label>
+                <input type="number" id="breedte" placeholder="Bijv. 1000mm">
+        
+                <label for="hoogte">Hoogte (mm):</label>
+                <input type="number" id="hoogte" placeholder="Bijv. 1500mm">
+        
+                <button onclick="berekenSamenstellingAlles()">Bereken samenstelling</button>
+        
+                <div id="resultaat"><span id="samenstelling"></span></div>
+            </div>
+
+            <!--Glashoek-->
+            <div class="card hidden" id="RUBglashoek">
+                <div class="keus" id="home" onclick="keusmenu(event)">Home</div>
+                <h2>Glashoek</h2>
+                <div id="gegevens" class="card2">
+                        <h3>Gegevens</h3>
+                        <label for="breedtew1">Breedte W1 (mm):</label>
+                        <input type="number" id="breedtew1" placeholder="Bijv. 1500mm">
+        
+                        <label for="breedtew2">Breedte W2 (mm):</label>
+                        <input type="number" id="breedtew2" placeholder="Bijv. 1500mm">
+        
+                        <label for="glasdikte">Glasdikte (mm):</label>
+                        <input type="number" id="glasdikte" placeholder="Bijv. 1500mm">
+                </div>
+        
+                <div id="parameters" class="card2">
+                        <h3>Parameters</h3>
+                        <p>(Wijzigen is niet nodig)</p>
+        
+                        <label for="parglasdikte">Extra bij glasdikte:</label>
+                        <input type="number" id="parglasdikte" value="1">
+        
+                        <label for="parprofieldiepte">Profieldiepte:</label>
+                        <input type="number" id="parprofieldiepte" value="77">
+        
+                        <label for="parafstandglastotprofiel">Afstand glas tot profiel:</label>
+                        <input type="number" id="parafstandglastotprofiel" value="8">
+                </div>
+        
+                <button id="knopparameters" onclick="parametersvis()">Parameters</button>
+                <button onclick="berekenglashoek()">Bereken glashoek</button>
+        
+                <div id="resultaat"><span id="resultaatafmetingen"></span></div>
+            </div>
+        </div>
+
+        <div class="AD1 hidden">
+
+        </div>
+        <div class="AD2 hidden">
+
+        </div>
+        <div class="Footer hidden">
+
+        </div>
+      </div>
+      <script>
+        function keusmenu(event) {
+            // Haal het aangeklikte element op via event.target
+            var gekozenElement = event.target;
+
+            var keusmenu = document.getElementById('keusmenu');
+
+            var home = document.getElementById('home');
+            var gekozen_glassamenstelling = document.getElementById('RUBglassamenstelling');
+            var gekozen_glashoek = document.getElementById('RUBglashoek');
+
+            // Haal de ID van het aangeklikte element
+            var gekozenId = gekozenElement.id;
+
+            // Toon de ID in de console
+            console.log('Je hebt geklikt op: ' + gekozenId);
+
+            // Hier kun je extra functies toevoegen afhankelijk van de keuze
+            if (gekozenId === 'glassamenstelling') {
+                console.log("Extra actie voor Glassamenstelling kan hier worden toegevoegd.");
+                keusmenu.classList.add('hidden');
+                gekozen_glassamenstelling.classList.remove('hidden');
+
+
+                // Voeg later extra functies toe voor 'Glassamenstelling'
+            } else if (gekozenId === 'glashoek') {
+                console.log("Extra actie voor Glashoek kan hier worden toegevoegd.");
+                // Voeg later extra functies toe voor 'Glashoek'
+                keusmenu.classList.add('hidden');
+                gekozen_glashoek.classList.remove('hidden');
+            }else if (gekozenId === 'home'){
+                location.reload();
+            }
+        }
+
+        //Glassamenstelling
+
+        function berekenSamenstellingAlles() {
+            const hoogte = parseFloat(document.getElementById('hoogte').value);
+            const breedte = parseFloat(document.getElementById('breedte').value);
+            const samenstellingElement = document.getElementById('samenstelling');
+            const glasselect = document.getElementById('keuzemenu');
+            const gekozenoptie = glasselect.options[glasselect.selectedIndex];
+            const glastype = glasselect.value;
+    
+            if (isNaN(hoogte) || isNaN(breedte) || !gekozenoptie || gekozenoptie.disabled) {
+                samenstellingElement.textContent = "Ongeldig";
+                return;
+            }
+    
+            const opp = (hoogte / 1000) * (breedte / 1000);
+            let samenstelling = "Navragen";
+    
+            //DUBBEL
+            //G048
+            if (glastype === 'g048nietgelaagd') {
+                if (opp <= 1.9) samenstelling = "4-15-4";
+                else if (opp <= 3) samenstelling = "6-15-4";
+                else if (opp <= 3.8) samenstelling = "6-15-5";
+                else if (opp <= 5) samenstelling = "6-15-6";
+                else if (opp <= 5.5) samenstelling = "8-15-5";
+                else if (opp <= 6.5) samenstelling = "8-15-6";
+                else if (opp <= 9.5) samenstelling = "8-15-8";
+                else if (opp <= 11.4) samenstelling = "10-15-8";
+                else if (opp <= 15.1) samenstelling = "10-15-10";
+
+            } else if (glastype === 'g048gelaagd') {
+                if (opp <= 1.9) samenstelling = "4-15-33.2";
+                else if (opp <= 3) samenstelling = "6-15-33.2";
+                else if (opp <= 3.8) samenstelling = "6-15-44.2";
+                else if (opp <= 5) samenstelling = "6-15-55.2";
+                else if (opp <= 5.5) samenstelling = "8-15-44.2";
+                else if (opp <= 6.5) samenstelling = "8-15-55.2";
+                else if (opp <= 9.5) samenstelling = "8-15-66.2";
+                else if (opp <= 11.4) samenstelling = "10-15-66.2";
+                else if (opp <= 15.1) samenstelling = "10-15-88.2";
+
+            } else if (glastype === 'g048dubbelgelaagd') {
+                if (opp <= 2.3) samenstelling = "44.2-15-33.2";
+                else if (opp <= 5.5) samenstelling = "66.2-15-44.2";
+                else if (opp <= 6.5) samenstelling = "66.2-15-55.2";
+                else if (opp <= 9.5) samenstelling = "66.2-15-66.2";
+            //G038
+            }else if (glastype === 'g038nietgelaagd') {
+                if (opp <= 1.9) samenstelling = "4-15-4";
+                else if (opp <= 3) samenstelling = "6-15-4";
+                else if (opp <= 3.8) samenstelling = "6-15-5";
+                else if (opp <= 5) samenstelling = "6-15-6";
+                else if (opp <= 5.5) samenstelling = "8-15-5";
+                else if (opp <= 6.5) samenstelling = "8-15-6";
+                else if (opp <= 9.5) samenstelling = "8-15-8";
+                else if (opp <= 11.4) samenstelling = "10-15-8";
+                else if (opp <= 15.1) samenstelling = "10-15-10";
+
+            } else if (glastype === 'g038gelaagd') {
+                if (opp <= 1.9) samenstelling = "4-15-33.2";
+                else if (opp <= 3) samenstelling = "6-15-33.2";
+                else if (opp <= 3.8) samenstelling = "6-15-44.2";
+                else if (opp <= 5) samenstelling = "6-15-55.2";
+                else if (opp <= 5.5) samenstelling = "8-15-44.2";
+                else if (opp <= 6.5) samenstelling = "8-15-55.2";
+                else if (opp <= 9.5) samenstelling = "8-15-66.2";
+                else if (opp <= 11.4) samenstelling = "10-15-66.2";
+                else if (opp <= 15.1) samenstelling = "10-15-88.2";
+
+            } else if (glastype === 'g038dubbelgelaagd') {
+                if (opp <= 2.3) samenstelling = "44.2-15-33.2";
+                else if (opp <= 5.5) samenstelling = "66.2-15-44.2";
+                else if (opp <= 6.5) samenstelling = "66.2-15-55.2";
+                else if (opp <= 9.5) samenstelling = "66.2-15-66.2";
+            //G028
+            }else if (glastype === 'g028nietgelaagd') {
+                if (opp <= 3) samenstelling = "6-15-4";
+                else if (opp <= 3.8) samenstelling = "6-15-5";
+                else if (opp <= 5) samenstelling = "6-15-6";
+                else if (opp <= 5.5) samenstelling = "8-15-5";
+                else if (opp <= 6.5) samenstelling = "8-15-6";
+                else if (opp <= 9.5) samenstelling = "8-15-8";
+
+            } else if (glastype === 'g028gelaagd') {
+                if (opp <= 3) samenstelling = "6-15-33.2";
+                else if (opp <= 3.8) samenstelling = "6-15-44.2";
+                else if (opp <= 5.5) samenstelling = "8-15-44.2";
+                else if (opp <= 6.5) samenstelling = "8-15-55.2";
+                else if (opp <= 9.5) samenstelling = "8-15-66.2";
+            } else if (glastype === 'g028dubbelgelaagd') {
+                if (opp <= 2.3) samenstelling = "44.2-15-33.2";
+            } 
+            //===TRIPLE===
+            if (glastype === 'tgg048nietgelaagd') {
+                if (opp <= 2.73) samenstelling = "4-15-4-15-4";
+                else if (opp <= 3.34) samenstelling = "6-15-4-15-4";
+                else if (opp <= 4.91) samenstelling = "6-15-4-15-6";
+                else if (opp <= 6.48) samenstelling = "6-15-6-15-6";
+                else if (opp <= 7.14) samenstelling = "8-15-6-15-6";
+                else if (opp <= 9.49) samenstelling = "8-15-6-15-8";
+                else if (opp <= 11.83) samenstelling = "8-15-8-15-8";
+                else if (opp <= 12.52) samenstelling = "10-15-8-15-8";
+                else if (opp <= 13.79) samenstelling = "10-15-6-15-10";
+                else if (opp <= 15.7) samenstelling = "10-15-8-15-10";
+            } else if (glastype === 'tgg048gelaagd') {
+                if (opp <= 2.74) samenstelling = "4-15-4-15-33.2";
+                else if (opp <= 3.48) samenstelling = "6-15-4-15-33.2";
+                else if (opp <= 5.05) samenstelling = "6-15-6-15-33.2";
+                else if (opp <= 6.13) samenstelling = "6-15-6-15-44.2";
+                else if (opp <= 6.88) samenstelling = "8-15-6-15-44.2";
+                else if (opp <= 9.23) samenstelling = "8-15-8-15-44.2";
+                else if (opp <= 9.59) samenstelling = "10-15-6-15-44.2";
+                else if (opp <= 10.59) samenstelling = "8-15-8-15-55.2";
+                else if (opp <= 11.9) samenstelling = "8-15-8-15-66.2";
+                else if (opp <= 13.17) samenstelling = "10-15-8-15-66.2";
+                else if (opp <= 13.47) samenstelling = "8-15-8-15-88.2";
+                else if (opp <= 16.25) samenstelling = "10-15-8-15-88.2";
+            } else if (glastype === 'tgg048dubbelgelaagd') {
+                if (opp <= 2.94) samenstelling = "33.2-4-33.2";
+                else if (opp <= 3.61) samenstelling = "33.2-15-6-15-33.2";
+                else if (opp <= 4.69) samenstelling = "44.2-15-6-15-33.2";
+                else if (opp <= 5.78) samenstelling = "44.2-15-6-15-44.2";
+                else if (opp <= 6.62) samenstelling = "44.2-15-8-15-33.2";
+                else if (opp <= 7.99) samenstelling = "55.2-15-8-15-44.2";
+                else if (opp <= 9.35) samenstelling = "55.2-15-8-15-44.2";
+                else if (opp <= 9.43) samenstelling = "66.2-15-8-15-44.2";
+                else if (opp <= 10.72) samenstelling = "66.2-15-8-15-55.2";
+                else if (opp <= 12.65) samenstelling = "66.2-15-8-15-66.2";
+                else if (opp <= 14.04) samenstelling = "88.2-15-8-15-66.2";
+                else if (opp <= 15) samenstelling = "88.2-15-8-15-88.2";
+            //G038
+            }else if (glastype === 'tgg038nietgelaagd') {
+                if (opp <= 2.73) samenstelling = "4-15-4-15-4";
+                else if (opp <= 3.34) samenstelling = "6-15-4-15-4";
+                else if (opp <= 4.91) samenstelling = "6-15-4-15-6";
+                else if (opp <= 6.48) samenstelling = "6-15-6-15-6";
+                else if (opp <= 7.14) samenstelling = "8-15-6-15-6";
+                else if (opp <= 9.49) samenstelling = "8-15-6-15-8";
+                else if (opp <= 11.83) samenstelling = "8-15-8-15-8";
+                else if (opp <= 12.52) samenstelling = "10-15-8-15-8";
+                else if (opp <= 13.79) samenstelling = "10-15-6-15-10";
+                else if (opp <= 15.7) samenstelling = "10-15-8-15-10";
+            } else if (glastype === 'tgg038gelaagd') {
+                if (opp <= 2.74) samenstelling = "4-15-4-15-33.2";
+                else if (opp <= 3.48) samenstelling = "6-15-4-15-33.2";
+                else if (opp <= 5.05) samenstelling = "6-15-6-15-33.2";
+                else if (opp <= 6.13) samenstelling = "6-15-6-15-44.2";
+                else if (opp <= 6.88) samenstelling = "8-15-6-15-44.2";
+                else if (opp <= 9.23) samenstelling = "8-15-8-15-44.2";
+                else if (opp <= 9.59) samenstelling = "10-15-6-15-44.2";
+                else if (opp <= 11.9) samenstelling = "8-15-8-15-66.2";
+                else if (opp <= 13.17) samenstelling = "10-15-8-15-66.2";
+            } else if (glastype === 'tgg038dubbelgelaagd') {
+                if (opp <= 2.94) samenstelling = "33.2-15-4-15-33.2";
+                else if (opp <= 3.61) samenstelling = "33.2-15-6-15-33.2";
+                else if (opp <= 4.69) samenstelling = "44.2-15-6-15-33.2";
+                else if (opp <= 5.78) samenstelling = "44.2-15-6-15-44.2";
+                else if (opp <= 6.62) samenstelling = "44.2-15-8-15-33.2";
+                else if (opp <= 7.99) samenstelling = "55.2-15-8-15-44.2";
+                else if (opp <= 9.43) samenstelling = "66.2-15-8-15-44.2";
+                else if (opp <= 12.65) samenstelling = "66.2-15-8-15-66.2";
+                else if (opp <= 14.04) samenstelling = "88.2-15-8-15-66.2";
+
+            //G028
+            }else if (glastype === 'tgg028nietgelaagd') {
+                if (opp <= 4.91) samenstelling = "6-15-4-15-6";
+                else if (opp <= 6.48) samenstelling = "6-15-6-15-6";
+                else if (opp <= 7.14) samenstelling = "8-15-6-15-6";
+                else if (opp <= 9.49) samenstelling = "8-15-6-15-8";
+                else if (opp <= 11.83) samenstelling = "8-15-8-15-8";
+                else if (opp <= 12.52) samenstelling = "10-15-8-15-8";
+
+            } else if (glastype === 'tgg028gelaagd') {
+                if (opp <= 6.13) samenstelling = "6-15-6-15-44.2";
+                else if (opp <= 6.88) samenstelling = "8-15-6-15-44.2";
+                else if (opp <= 9.23) samenstelling = "8-15-8-15-44.2";
+                else if (opp <= 9.59) samenstelling = "10-15-6-15-44.2";
+                else if (opp <= 11.9) samenstelling = "8-15-8-15-66.2";
+                else if (opp <= 13.17) samenstelling = "10-15-8-15-66.2";
+
+            } else if (glastype === 'tgg028dubbelgelaagd') {
+                if (opp <= 5.78) samenstelling = "44.2-15-6-15-44.2";
+                else if (opp <= 7.99) samenstelling = "55.2-15-8-15-44.2";
+                else if (opp <= 9.43) samenstelling = "66.2-15-8-15-44.2";
+                else if (opp <= 12.65) samenstelling = "66.2-15-8-15-66.2";
+                else if (opp <= 14.04) samenstelling = "88.2-15-8-15-66.2";
+
+            } else if (glastype === 'balustrade') {
+                if (opp <= 15.1) samenstelling = "88.2";
+            } 
+    
+            // Bereken glasdikte
+            let glasDikte = 0;
+            if (typeof samenstelling === "string") {
+                const delen = samenstelling.split("-");
+                for (let i = 0; i < delen.length; i++) {
+                    const deel = delen[i];
+                    if (deel === "15") continue; // spouw telt niet mee
+    
+                    if (deel.includes(".")) {
+                        // gelaagd glas zoals 33.2
+                        const cijfers = deel.split(".");
+                        if (cijfers[0].length === 2) {
+                            glasDikte += parseInt(cijfers[0][0]) + parseInt(cijfers[0][1]) + 1;
+                        } else {
+                            glasDikte += parseInt(cijfers[0]) + 1;
+                        }
+                    } else {
+                        glasDikte += parseInt(deel);
+                    }
+                }
+            }
+    
+            const gewicht = typeof samenstelling === "string"
+                ? (opp * glasDikte * 2.5).toFixed(2)
+                : "-";
+    
+            samenstellingElement.innerHTML = `
+                <div class="glasinfo">
+                    <span class="glasinfoglassoort">Glassoort: ${gekozenoptie.text}</span><br>
+                    <span class="glasinfosamenstelling">Samenstelling: ${samenstelling}</span><br>
+                    <span class="glasinfogewicht">Gewicht: ${gewicht} kg</span><br>
+                    <span class="glasinfooppervlakte">Oppervlakte: ${opp.toFixed(2)} m²</span><br>
+                    <span class="glasinfoglasdikte">Totale glasdikte: ${glasDikte} mm (exlusief spouw)</span><br>
+                </div>
+            `;
+        }
+
+        //Glashoek
+
+        window.onload = function(){
+            const knopparameters = document.getElementById('knopparameters');
+            knopparameters.innerText ="Parameters";
+        }
+        function parametersvis(){
+            const parameters = document.getElementById('parameters');
+            const gegevens = document.getElementById('gegevens');
+            const knopparameters = document.getElementById('knopparameters')
+
+            if (parameters.classList.contains('hidden')){
+                parameters.classList.remove('hidden');
+                parameters.classList.add('card2')
+                gegevens.classList.remove('card2');
+                gegevens.classList.add('hidden');
+                knopparameters.innerText = "Gegevens";
+            }else{
+                parameters.classList.remove('card2');
+                parameters.classList.add('hidden');
+                gegevens.classList.remove('hidden');
+                gegevens.classList.add('card2');
+                knopparameters.innerText = "Parameters";
+            }
+        }
+        function berekenglashoek(){
+            const breedtew1 = parseFloat(document.getElementById('breedtew1').value);
+            const breedtew2 = parseFloat(document.getElementById('breedtew2').value);
+            const glasdikte = parseFloat(document.getElementById('glasdikte').value);
+
+            const parglasdikte = parseFloat(document.getElementById('parglasdikte').value); 
+            const parprofieldiepte = parseFloat(document.getElementById('parprofieldiepte').value);
+            const parafstandglastotprofiel = parseFloat(document.getElementById('parafstandglastotprofiel').value);
+            const aftrek = parprofieldiepte-(glasdikte + parglasdikte)-parafstandglastotprofiel
+            
+            
+            const resultaatafmetingen = document.getElementById('resultaatafmetingen')
+
+            if(isNaN(breedtew1) || isNaN(breedtew2) || isNaN(glasdikte)
+                || !breedtew1 || !breedtew2 ||!glasdikte){
+                resultaatafmetingen.textContent = "Getal ingeven";
+                return
+            }
+
+            resultaatafmetingen.textContent="tis inorde whiii";
+            resultaatafmetingen.innerHTML=`
+                <div class="resultaat">
+                    <span style="font-weight: bold;">Breedte 1:</span><span> ${breedtew1-aftrek} mm</span><br>
+                    <span style="font-weight: bold;">Breedte 2:</span><span> ${breedtew2-aftrek} mm</span><br>
+                </div>
+            `;
+            console.log(aftrek)
+        }
+
+      </script>
+</body>
+</html>
